@@ -22,6 +22,23 @@ public class Boat {
     this.coordY = y;
   }
 
+  public void setDirection(int dir){
+    this.direction = dir;
+  }
+
+  public boolean isLocationSet(){
+    if (coordX != UNSET && coordY != UNSET)
+      return true;
+    else
+      return false;
+  }
+
+  public boolean isDirectionSet(){
+    if(direction != UNSET)
+      return true;
+    else
+      return false;
+  }
 
   public boolean getHundido() {
     return hundido;

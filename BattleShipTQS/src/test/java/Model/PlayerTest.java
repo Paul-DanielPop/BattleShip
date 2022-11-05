@@ -17,6 +17,7 @@ class PlayerTest {
         assertTrue(p.getPlayerBoard()!=null);
         assertTrue(p.getOppBoard()!=null);
         assertTrue(p.getName()=="Carles");
+        assertTrue(p.getWonGames()==0);
         ArrayList boats= p.getBoats();
         Boat boat = (Boat) boats.get(0);
         assertTrue(boat.getLength()==3);

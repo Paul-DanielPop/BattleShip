@@ -48,7 +48,8 @@ public class Player {
   public Board getOppBoard() {return oppBoard;}
 
   public void addBoats(){
-
+   // for (Boat b : boats)
+     // playerBoard.addBoat(b);
   }
 
   public int numBoatsAlive(){
@@ -56,7 +57,9 @@ public class Player {
   }
 
   public void chooseBoatPosition(Boat b, int row, int col, int direction) {
-
+      b.setLocation(row, col);
+      b.setDirection(direction);
+     // playerBoard.addBoat(b);
   }
 
 

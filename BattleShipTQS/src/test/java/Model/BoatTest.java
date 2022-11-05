@@ -30,4 +30,26 @@ class BoatTest {
     assertTrue(boat.getCoordY() == 4);
   }
 
+  @Test
+  void isLocationSet(){
+    Boat boat = new Boat(3);
+    assertTrue(boat.getCoordX() == -1);
+    assertTrue(boat.getCoordY() == -1);
+    assertFalse(boat.isLocationSet());
+
+    boat.setLocation(2,4);
+
+    assertTrue(boat.isLocationSet());
+
+  }
+
+  @Test
+  void isDirectionSet(){
+    Boat boat = new Boat(3);
+    assertFalse(boat.isDirectionSet());
+    boat.setDirection(Boat.HORIZONTAL);
+    assertTrue(boat.isDirectionSet());
+
+  }
+
 }
