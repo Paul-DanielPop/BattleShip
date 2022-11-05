@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/BattleShip.iml" filepath="$PROJECT_DIR$/.idea/BattleShip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BattleShipTQS/BattleShipTQS.iml" filepath="$PROJECT_DIR$/BattleShipTQS/BattleShipTQS.iml" />
+    </modules>
+  </component>
+</project>

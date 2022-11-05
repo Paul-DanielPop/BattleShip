@@ -1,0 +1,11 @@
+package View;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class BoardTest {
+
+  void testBoardConstructor(){
+
+  }
+
+}

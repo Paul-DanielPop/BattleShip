@@ -7,23 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoatTest {
 
   @Test
-  void testBoat() {
-    Boat barco1 = new Boat(3, 'L');
+  void testBoatConstructor() {
+    Boat barco1 = new Boat(3);
 
-    assertTrue(barco1.getVertical() == true);
     assertTrue(barco1.getHundido() == false);
     assertFalse(barco1.getHundido() == true);
     assertTrue(barco1.getLength() == 3);
-    assertTrue(barco1.getIdentificador() == 'L');
+    assertTrue(barco1.getCoordX() == -1);
+    assertTrue(barco1.getCoordY() == -1);
   }
 
-  @Test
-  void setCoordY() {
-  }
 
-  @Test
-  void getVertical() {
-  }
 
   @Test
   void getHundido() {
@@ -33,7 +27,8 @@ class BoatTest {
   void getLength() {
   }
 
-  @Test
-  void getIdentificador() {
+  void setLocation(){
+
   }
+
 }
