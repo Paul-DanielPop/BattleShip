@@ -10,6 +10,7 @@ public class Player {
   private static final int NUM_BOATS = 4;
   private String name;
 
+
   private ArrayList<Boat> boats;
   private int wonGames;
   private boolean winner;
