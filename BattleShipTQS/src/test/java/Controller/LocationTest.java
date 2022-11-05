@@ -65,4 +65,20 @@ class LocationTest {
     assertTrue(location.hasShip() == false);
   }
 
+  @Test
+  void setLengthOfShip(){
+    location = new Location();
+
+    location.setLengthOfShip(1);
+    assertTrue(location.getLengthOfShip() == 1);
+  }
+
+  @Test
+  void setDirectionOfShip(){
+    location = new Location();
+
+    location.setDirectionOfShip(1);
+    assertTrue(location.getDirectionOfShip() == 1);
+
+  }
 }
