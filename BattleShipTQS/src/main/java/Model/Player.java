@@ -1,22 +1,34 @@
 package Model;
 
+import View.Board;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
+  private static final int[] BOAT_LENGTHS = {3, 4, 5, 6};
+  private static final int NUM_BOATS = 4;
   private String name;
-  private ArrayList<Little> littles;
-  private ArrayList<Medium> mediums;
-  private ArrayList<Big> bigs;
+
+  private ArrayList<Boat> boats;
   private int wonGames;
   private boolean winner;
 
+  private Board playerBoard;
+  private Board oppBoard;
+
   public Player(String name) {
+    boats = new ArrayList<Boat>();
+    for(int i=0; i<NUM_BOATS; i++){
+      Boat boatAux = new Boat(BOAT_LENGTHS[i]);
+      boats.add(boatAux);
+    }
+
     this.name = name;
-    littles = new ArrayList<Little>(4);
-    mediums = new ArrayList<Medium>(3);
-    bigs = new ArrayList<Big>(2);
     wonGames = 0;
     winner = false;
+    playerBoard = new Board();
+    oppBoard = new Board();
   }
 
   public String getName() {
@@ -31,16 +43,24 @@ public class Player {
     return winner;
   }
 
-  public ArrayList<Medium> getMediums() {
-    return mediums;
+  public ArrayList<Boat> getBoats() {return boats;}
+  public Board getPlayerBoard() {return playerBoard;}
+  public Board getOppBoard() {return oppBoard;}
+
+  public void addBoats(){
+
   }
 
-  public ArrayList<Big> getBigs() {
-    return bigs;
+  public int numBoatsAlive(){
+   return 0;
   }
 
-  public ArrayList<Little> getLittles() {
-    return littles;
+  public void chooseBoatPosition(Boat b, int row, int col, int direction) {
+
   }
+
+
+
+
 
 }
