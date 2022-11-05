@@ -17,18 +17,17 @@ class BoatTest {
     assertTrue(barco1.getCoordY() == -1);
   }
 
-
-
   @Test
-  void getHundido() {
-  }
-
-  @Test
-  void getLength() {
-  }
-
   void setLocation(){
+    Boat boat = new Boat(3);
 
+    assertTrue(boat.getCoordX() == -1);
+    assertTrue(boat.getCoordY() == -1);
+
+    boat.setLocation(2,4);
+
+    assertTrue(boat.getCoordX() == 2);
+    assertTrue(boat.getCoordY() == 4);
   }
 
 }

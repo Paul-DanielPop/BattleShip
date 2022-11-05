@@ -12,7 +12,6 @@ public class Location {
   private int directionOfShip;
 
   public Location() {
-    // Set initial values
     status = 0;
     hasShip = false;
     lengthOfShip = -1;

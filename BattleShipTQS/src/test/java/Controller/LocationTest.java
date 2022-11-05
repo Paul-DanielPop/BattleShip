@@ -21,48 +21,48 @@ class LocationTest {
     location = new Location();
 
     assertTrue(location.checkHit() == false);
+    assertTrue(location.getStatus() == 0);
     location.markHit();
     assertTrue(location.checkHit() == true);
+    assertTrue(location.getStatus() == 1);
+    assertFalse(location.getStatus() != 1);
   }
 
   @Test
   void checkMiss() {
+    location = new Location();
+
+    assertTrue(location.checkMiss() == false);
+    assertTrue(location.getStatus() == 0);
+    location.markMiss();
+    assertTrue(location.checkMiss() == true);
+    assertTrue(location.getStatus() == 2);
+    assertFalse(location.getStatus() != 2);
   }
 
   @Test
   void isUnguessed() {
+    location = new Location();
+
+    assertTrue(location.isUnguessed() == true);
+    assertTrue(location.getStatus() == 0);
+    location.markMiss();
+    assertTrue(location.isUnguessed() == false);
+    location.markHit();
+    assertTrue(location.isUnguessed() == false);
+    assertTrue(location.isUnguessed() == false);
   }
 
-  @Test
-  void markHit() {
-  }
-
-  @Test
-  void markMiss() {
-  }
 
   @Test
   void hasShip() {
+    location = new Location();
+
+    assertTrue(location.hasShip() == false);
+    location.setShip(true);
+    assertTrue(location.hasShip() == true);
+    location.setShip(false);
+    assertTrue(location.hasShip() == false);
   }
 
-  @Test
-  void setShip() {
-  }
-
-
-  @Test
-  void getLengthOfShip() {
-  }
-
-  @Test
-  void setLengthOfShip() {
-  }
-
-  @Test
-  void getDirectionOfShip() {
-  }
-
-  @Test
-  void setDirectionOfShip() {
-  }
 }
