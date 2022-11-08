@@ -69,9 +69,9 @@ class BoardTest {
     boat.setDirection(Boat.VERTICAL);
     boat.setLocation(0,0);
     Location l1 = b.get(0,0);
-    Location l2 = b.get(1,0);
-    Location l3 = b.get(2,0);
-    Location l4 = b.get(3,0);
+    Location l2 = b.get(0,1);
+    Location l3 = b.get(0,2);
+    Location l4 = b.get(0,3);
     Location l5 = b.get(0,1);
 
     assertFalse(l1.hasShip());
@@ -80,7 +80,7 @@ class BoardTest {
     assertFalse(l4.hasShip());
     assertFalse(l5.hasShip());
 
-    b.addBoat(boat);
+    b.addBoat(boat,0 ,0);
 
     assertTrue(l1.hasShip());
     assertTrue(l2.hasShip());

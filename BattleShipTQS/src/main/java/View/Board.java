@@ -43,13 +43,38 @@ public class Board {
     return !board[row][col].isUnguessed();
   }
 
+  public void setStatus(int row, int col, int status)
+  {
+    board[row][col].setStatus(status);
+  }
+
+  public int getStatus(int row, int col)
+  {
+    return board[row][col].getStatus();
+  }
+
   public boolean hasLost(){
     if(points==18)
       return true;
     return false;
   }
 
-  public void addBoat(Boat b){
+//  public void addBoat(Boat b){
+//
+//  }
+
+  public void addBoat(Boat boat, int row, int col)
+  {
 
   }
+
+  public void setShip(int row, int col, boolean val)
+  {
+    board[row][col].setShip(val);
   }
+
+  public boolean hasShip(int row, int col)
+  {
+    return board[row][col].hasShip();
+  }
+}

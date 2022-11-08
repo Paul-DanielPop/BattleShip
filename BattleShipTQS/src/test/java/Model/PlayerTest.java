@@ -1,12 +1,14 @@
 package Model;
 
 import org.junit.jupiter.api.Test;
+
+import java.lang.annotation.Annotation;
 import java.util.List;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class PlayerTest {
+class PlayerTest{
 
     @Test
     void testPlayerConstructor(){

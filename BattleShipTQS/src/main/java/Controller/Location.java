@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Boat;
+
 public class Location {
 
   public static final int UNGUESSED = 0;
@@ -51,8 +53,8 @@ public class Location {
     return hasShip;
   }
 
-  public void setShip(boolean val) {
-    this.hasShip = val;
+  public void setShip(Boolean bool) {
+    this.hasShip = bool;
   }
 
   public void setStatus(int status) {
