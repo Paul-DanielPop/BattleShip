@@ -26,14 +26,6 @@ class PlayerTest {
     }
 
     @Test
-    void getName() {
-    }
-
-    @Test
-    void getWonGames() {
-    }
-
-    @Test
     void hasWon() {
     }
 

@@ -1,10 +1,11 @@
 package View;
 
 import Controller.Location;
+import Model.Boat;
 
 public class Board {
 
-  private Location[][] grid;
+  private Location[][] board;
   private int points;
 
   // Constants for number of rows and columns.
@@ -13,15 +14,42 @@ public class Board {
 
   public Board()
   {
-    grid = new Location[NUM_ROWS][NUM_COLS];
+    board = new Location[NUM_ROWS][NUM_COLS];
 
-    for (int row = 0; row < grid.length; row++)
+    for (int row = 0; row < board.length; row++)
     {
-      for (int col = 0; col < grid[row].length; col++)
+      for (int col = 0; col < board[row].length; col++)
       {
         Location location = new Location();
-        grid[row][col] = location;
+        board[row][col] = location;
       }
     }
   }
-}
+
+  public Location get(int row, int col){ return board[row][col]; }
+  public int getPoints() { return points;}
+
+  public void markHit(int row, int col){
+    board[row][col].markHit();
+    points++;
+  }
+
+  public void markMiss(int row, int col)
+  {
+    board[row][col].markMiss();
+  }
+
+  public boolean alreadyGuessed(int row, int col) {
+    return !board[row][col].isUnguessed();
+  }
+
+  public boolean hasLost(){
+    if(points==18)
+      return true;
+    return false;
+  }
+
+  public void addBoat(Boat b){
+
+  }
+  }

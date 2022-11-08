@@ -65,4 +65,5 @@ class LocationTest {
     assertTrue(location.hasShip() == false);
   }
 
+
 }
