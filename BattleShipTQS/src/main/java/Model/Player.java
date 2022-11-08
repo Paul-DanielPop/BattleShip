@@ -3,7 +3,6 @@ package Model;
 import View.Board;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Player {
   private static final int[] BOAT_LENGTHS = {3, 4, 5, 6};
