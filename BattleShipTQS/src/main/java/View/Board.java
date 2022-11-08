@@ -59,12 +59,27 @@ public class Board {
     return false;
   }
 
-//  public void addBoat(Boat b){
-//
-//  }
+  public void addBoat(Boat b){
+    int row = b.getCoordX();
+    int col = b.getCoordY();
+    int length = b.getLength();
+    int dir = b.getDirection();
 
-  public void addBoat(Boat boat, int row, int col)
-  {
+    if(dir == 0){
+      for(int i=col; i<col+length;i++){
+        board[row][i].setShip(true);
+        board[row][i].setLengthOfShip(length);
+        board[row][i].setDirectionOfShip(dir);
+      }
+    }else if(dir==1)
+    {
+      for(int i=row; i<row+length;i++)
+      {
+        board[i][col].setShip(true);
+        board[i][col].setLengthOfShip(length);
+        board[i][col].setDirectionOfShip(dir);
+      }
+    }
 
   }
 
@@ -77,4 +92,93 @@ public class Board {
   {
     return board[row][col].hasShip();
   }
+
+
+
+  private void printMethod(){
+
+    System.out.print("  ");
+    for (int i = 1; i <= NUM_COLS; i++)
+    {
+      System.out.print(i + " ");
+    }
+    System.out.println();
+
+    for (int i = 1; i <= NUM_ROWS; i++){
+      System.out.println(switchIntToChar(i) + "\t");
+
+      for (int j = 0; j < NUM_COLS; j++)
+      {
+        if (board[i][j].checkHit())
+          System.out.print("X ");
+        else if (board[i][j].hasShip())
+        {
+          // System.out.print("X ");
+          if (board[i][j].getLengthOfShip() == 2)
+          {
+            System.out.print("D ");
+          }
+          else if (board[i][j].getLengthOfShip() == 3)
+          {
+            System.out.print("C ");
+          }
+          else if (board[i][j].getLengthOfShip() == 4)
+          {
+            System.out.print("B ");
+          }
+          else if (board[i][j].getLengthOfShip() == 5)
+          {
+            System.out.print("A ");
+          }
+        }
+        else if (!(board[i][j].hasShip()))
+        {
+          System.out.print("- ");
+        }
+      }
+    }
+    System.out.println();
+  }
+
+  public char switchIntToChar(int x){
+    char res;
+
+    switch (x){
+      case 1:
+        res = 'A';
+        break;
+      case 2:
+        res = 'B';
+        break;
+      case 3:
+        res = 'C';
+        break;
+      case 4:
+        res = 'D';
+        break;
+      case 5:
+        res = 'E';
+        break;
+      case 6:
+        res = 'F';
+        break;
+      case 7:
+        res = 'G';
+        break;
+      case 8:
+        res = 'H';
+        break;
+      case 9:
+        res = 'I';
+        break;
+      case 10:
+        res = 'J';
+        break;
+      default:
+        return 'Z';
+    }
+
+    return res;
+  }
+
 }
