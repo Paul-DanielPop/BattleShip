@@ -25,6 +25,10 @@ public class Boat {
   public void setDirection(int dir){
     this.direction = dir;
   }
+  public int getDirection(){
+    return this.direction;
+  }
+
 
   public boolean isLocationSet(){
     if (coordX != UNSET && coordY != UNSET)
