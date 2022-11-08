@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Boat;
 
 public class Location {
 

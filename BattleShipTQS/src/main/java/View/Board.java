@@ -43,9 +43,15 @@ public class Board {
     return !board[row][col].isUnguessed();
   }
 
-  public void setStatus(int row, int col, int status) {board[row][col].setStatus(status);}
+  public void setStatus(int row, int col, int status)
+  {
+    board[row][col].setStatus(status);
+  }
 
-  public int getStatus(int row, int col) {return board[row][col].getStatus();}
+  public int getStatus(int row, int col)
+  {
+    return board[row][col].getStatus();
+  }
 
   public boolean hasLost(){
     if(points==18)
@@ -53,34 +59,22 @@ public class Board {
     return false;
   }
 
-  public void addBoat(Boat b){
-    int row = b.getCoordX();
-    int col = b.getCoordY();
-    int length = b.getLength();
-    int dir = b.getDirection();
+//  public void addBoat(Boat b){
+//
+//  }
 
-    if(dir == 0){
-      for(int i=col; i<col+length;i++){
-        board[row][i].setShip(true);
-        board[row][i].setLengthOfShip(length);
-        board[row][i].setDirectionOfShip(dir);
-      }
-    }else if(dir==1)
-    {
-      for(int i=row; i<row+length;i++)
-      {
-        board[i][col].setShip(true);
-        board[i][col].setLengthOfShip(length);
-        board[i][col].setDirectionOfShip(dir);
-      }
-    }
+  public void addBoat(Boat boat, int row, int col)
+  {
 
   }
 
-  public void setBoat(int row, int col, boolean val) {board[row][col].setShip(val);}
+  public void setShip(int row, int col, boolean val)
+  {
+    board[row][col].setShip(val);
+  }
 
-  public boolean hasBoat(int row, int col) { return board[row][col].hasShip();}
-
-
-
+  public boolean hasShip(int row, int col)
+  {
+    return board[row][col].hasShip();
+  }
 }
