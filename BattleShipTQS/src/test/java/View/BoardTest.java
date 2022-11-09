@@ -1,4 +1,4 @@
-package Model.View;
+package View;
 import Controller.Location;
 import Model.Boat;
 import View.Board;
