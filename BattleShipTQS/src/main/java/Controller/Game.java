@@ -8,6 +8,21 @@ import java.util.Scanner;
 public class Game {
 
   public static Scanner reader = new Scanner(System.in);
+  private Player p1;
+  private Player p2;
+
+  public Game(){
+    p1=new Player("player1");
+    p2=new Player("player2");
+  }
+
+  public Player getPlayer1(){return p1;}
+  public Player getPlayer2(){return p2;}
+
+  private static String askForGuess(Player p1, Player p2) {
+    return "a";
+  }
+
 
   protected static boolean hasErrors(int row, int col, int dir, Player p, int count){
     int length = p.boats.get(count).getLength();

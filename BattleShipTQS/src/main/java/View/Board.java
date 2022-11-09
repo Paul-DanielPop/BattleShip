@@ -60,8 +60,8 @@ public class Board {
   }
 
   public void addBoat(Boat b){
-    int row = b.getCoordX();
-    int col = b.getCoordY();
+    int row = b.getCoordY();
+    int col = b.getCoordX();
     int length = b.getLength();
     int dir = b.getDirection();
 
