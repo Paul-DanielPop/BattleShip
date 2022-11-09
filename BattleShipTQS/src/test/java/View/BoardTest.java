@@ -91,4 +91,16 @@ class BoardTest {
 
   }
 
+  @Test
+  void switchIntToChar(){
+    Board b = new Board();
+
+    char n1 = b.switchIntToChar(0);
+    assertTrue(n1 == 'A');
+    char n2 = b.switchIntToChar(9);
+    assertTrue(n2 == 'J');
+    char n3 = b.switchIntToChar(12);
+    assertTrue(n3 == 'Z');
+  }
+
 }
