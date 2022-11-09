@@ -95,17 +95,17 @@ public class Board {
 
 
 
-  private void printMethod(){
+  public void printMethod(){
 
-    System.out.print("  ");
+    System.out.print("\t");
     for (int i = 1; i <= NUM_COLS; i++)
     {
       System.out.print(i + " ");
     }
     System.out.println();
 
-    for (int i = 1; i <= NUM_ROWS; i++){
-      System.out.println(switchIntToChar(i) + "\t");
+    for (int i = 0; i < NUM_ROWS; i++){
+      System.out.print(switchIntToChar(i) + "\t");
 
       for (int j = 0; j < NUM_COLS; j++)
       {
@@ -135,7 +135,9 @@ public class Board {
         {
           System.out.print("- ");
         }
+
       }
+      System.out.println("\t");
     }
     System.out.println();
   }
@@ -144,34 +146,34 @@ public class Board {
     char res;
 
     switch (x){
-      case 1:
+      case 0:
         res = 'A';
         break;
-      case 2:
+      case 1:
         res = 'B';
         break;
-      case 3:
+      case 2:
         res = 'C';
         break;
-      case 4:
+      case 3:
         res = 'D';
         break;
-      case 5:
+      case 4:
         res = 'E';
         break;
-      case 6:
+      case 5:
         res = 'F';
         break;
-      case 7:
+      case 6:
         res = 'G';
         break;
-      case 8:
+      case 7:
         res = 'H';
         break;
-      case 9:
+      case 8:
         res = 'I';
         break;
-      case 10:
+      case 9:
         res = 'J';
         break;
       default:

@@ -1,6 +1,7 @@
-package View;
+package Model.View;
 import Controller.Location;
 import Model.Boat;
+import View.Board;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
