@@ -10,7 +10,7 @@ public class Player {
   private String name;
 
 
-  private ArrayList<Boat> boats;
+  public ArrayList<Boat> boats;
   private int wonGames;
   private boolean winner;
 
