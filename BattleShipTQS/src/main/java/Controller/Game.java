@@ -9,6 +9,50 @@ public class Game {
 
   public static Scanner reader = new Scanner(System.in);
 
+  protected static boolean hasErrors(int row, int col, int dir, Player p, int count){
+    int length = p.boats.get(count).getLength();
+
+    if(dir==0){
+      int checker = length+col;
+      if(checker>10){
+        System.out.println("EL BARCO NO CABE");
+        return true;
+      }
+    }
+    if (dir == 1) {
+      int checker=length+row;
+      if(checker>10){
+        System.out.println("EL BARCO NO CABE");
+        return true;
+      }
+    }
+
+    if(dir==0){
+      for(int i=col; i<col+length;i++)
+      {
+        if(p.getPlayerBoard().hasShip(row,i))
+        {
+          System.out.println("YA HAY UN BARCO AQUI");
+          return true;
+        }
+      }
+    }
+
+    if(dir==1){
+      for(int i=row; i<row+length;i++)
+      {
+        if(p.getPlayerBoard().hasShip(i,col))
+        {
+          System.out.println("YA HAY UN BARCO AQUI");
+          return true;
+        }
+      }
+    }
+
+
+    return false;
+  }
+
   public void setup(Player p){
     p.getPlayerBoard().printMethod();
     System.out.println();
@@ -33,7 +77,27 @@ public class Game {
 
           System.out.print("Type in direction (0-H, 1-V): ");
           dir = reader.nextInt();
+
+          if (col >= 0 && col <= 9 && row != -1 && dir != -1) // Check valid input
+          {
+            if (!hasErrors(row, col, dir, p, normalCounter)) // Check if errors will produce (out of bounds)
+            {
+              break;
+            }
+          }
+
+          System.out.println("Invalid location!");
         }
+
+        p.getBoats().get(normalCounter).setLocation(row, col);
+        p.getBoats().get(normalCounter).setDirection(dir);
+        p.getPlayerBoard().addBoat(p.getBoats().get(normalCounter));
+        p.getPlayerBoard().printMethod();
+        System.out.println();
+        System.out.println("You have " + p.numBoatsAlive() + " remaining ships to place.");
+
+        normalCounter++;
+        counter++;
       }
     }
   }

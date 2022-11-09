@@ -57,4 +57,10 @@ class GameTest {
         assertTrue(n4 == -1);
     }
 
+    @Test
+    void setup(){
+        Game game = new Game();
+        Player player = new Player("Paul");
+    }
+
 }
