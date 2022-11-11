@@ -59,7 +59,7 @@ public class Player {
   }
 
   public void chooseBoatPosition(Boat b, int row, int col, int direction) {
-      b.setLocation(row, col);
+      b.setLocation(col, row); //col=x, row=y
       b.setDirection(direction);
       playerBoard.addBoat(b);
   }

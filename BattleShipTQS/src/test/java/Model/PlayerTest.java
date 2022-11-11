@@ -44,19 +44,19 @@ class PlayerTest{
         assertTrue(player.getBoats().get(0).getCoordY() == 0);
 
         assertTrue(player.getBoats().get(1).getDirection() == 0);
-        assertTrue(player.getBoats().get(1).getCoordX() == 1);
-        assertTrue(player.getBoats().get(1).getCoordY() == 0);
+        assertTrue(player.getBoats().get(1).getCoordX() == 0);
+        assertTrue(player.getBoats().get(1).getCoordY() == 1);
 
         assertTrue(player.getBoats().get(2).getDirection() == 0);
-        assertTrue(player.getBoats().get(2).getCoordX() == 2);
-        assertTrue(player.getBoats().get(2).getCoordY() == 0);
+        assertTrue(player.getBoats().get(2).getCoordX() == 0);
+        assertTrue(player.getBoats().get(2).getCoordY() == 2);
 
         assertTrue(player.getBoats().get(3).getDirection() == 0);
-        assertTrue(player.getBoats().get(3).getCoordX() == 3);
-        assertTrue(player.getBoats().get(3).getCoordY() == 0);
+        assertTrue(player.getBoats().get(3).getCoordX() == 0);
+        assertTrue(player.getBoats().get(3).getCoordY() == 3);
 
         assertTrue(player.getPlayerBoard().hasShip(0,0));
-        assertTrue(player.getPlayerBoard().hasShip(0,1));
+        assertTrue(player.getPlayerBoard().hasShip(1,0));
         assertTrue(player.getPlayerBoard().hasShip(2,0));
         assertTrue(player.getPlayerBoard().hasShip(3,0));
     }
