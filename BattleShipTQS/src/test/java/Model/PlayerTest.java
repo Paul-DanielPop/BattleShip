@@ -19,7 +19,6 @@ class PlayerTest{
         assertTrue(p.getPlayerBoard()!=null);
         assertTrue(p.getOppBoard()!=null);
         assertTrue(p.getName()=="Carles");
-        assertTrue(p.getWonGames()==0);
         ArrayList boats= p.getBoats();
         Boat boat = (Boat) boats.get(0);
         assertTrue(boat.getLength()==3);
@@ -28,30 +27,37 @@ class PlayerTest{
     }
 
     @Test
-    void hasWon() {
-    }
-
-    @Test
-    void getBoats() {
-    }
-
-    @Test
-    void getPlayerBoard() {
-    }
-
-    @Test
-    void getOppBoard() {
-    }
-
-    @Test
-    void addBoats() {
-    }
-
-    @Test
-    void numBoatsAlive() {
-    }
-
-    @Test
     void chooseBoatPosition() {
+        Player player = new Player("Carles");
+
+        player.chooseBoatPosition(player.getBoats().get(0), 0, 0, 0);
+        assertTrue(player.numBoatsAlive() == 3);
+        player.chooseBoatPosition(player.getBoats().get(1), 1, 0, 0);
+        assertTrue(player.numBoatsAlive() == 2);
+        player.chooseBoatPosition(player.getBoats().get(2), 2, 0, 0);
+        assertTrue(player.numBoatsAlive() == 1);
+        player.chooseBoatPosition(player.getBoats().get(3), 3, 0, 0);
+        assertTrue(player.numBoatsAlive() == 0);
+
+        assertTrue(player.getBoats().get(0).getDirection() == 0);
+        assertTrue(player.getBoats().get(0).getCoordX() == 0);
+        assertTrue(player.getBoats().get(0).getCoordY() == 0);
+
+        assertTrue(player.getBoats().get(1).getDirection() == 0);
+        assertTrue(player.getBoats().get(1).getCoordX() == 1);
+        assertTrue(player.getBoats().get(1).getCoordY() == 0);
+
+        assertTrue(player.getBoats().get(2).getDirection() == 0);
+        assertTrue(player.getBoats().get(2).getCoordX() == 2);
+        assertTrue(player.getBoats().get(2).getCoordY() == 0);
+
+        assertTrue(player.getBoats().get(3).getDirection() == 0);
+        assertTrue(player.getBoats().get(3).getCoordX() == 3);
+        assertTrue(player.getBoats().get(3).getCoordY() == 0);
+
+        assertTrue(player.getPlayerBoard().hasShip(0,0));
+        assertTrue(player.getPlayerBoard().hasShip(0,1));
+        assertTrue(player.getPlayerBoard().hasShip(2,0));
+        assertTrue(player.getPlayerBoard().hasShip(3,0));
     }
 }

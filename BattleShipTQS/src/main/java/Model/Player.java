@@ -11,7 +11,6 @@ public class Player {
 
 
   public ArrayList<Boat> boats;
-  private int wonGames;
   private boolean winner;
 
   private Board playerBoard;
@@ -25,7 +24,6 @@ public class Player {
     }
 
     this.name = name;
-    wonGames = 0;
     winner = false;
     playerBoard = new Board();
     oppBoard = new Board();
@@ -33,10 +31,6 @@ public class Player {
 
   public String getName() {
     return name;
-  }
-
-  public int getWonGames() {
-    return wonGames;
   }
 
   public boolean hasWon() {
@@ -47,19 +41,27 @@ public class Player {
   public Board getPlayerBoard() {return playerBoard;}
   public Board getOppBoard() {return oppBoard;}
 
-  public void addBoats(){
-   // for (Boat b : boats)
-     // playerBoard.addBoat(b);
-  }
+//  public void addBoats(){
+//   for (Boat b : boats)
+//     playerBoard.addBoat(b);
+//  }
 
   public int numBoatsAlive(){
-   return 0;
+    int counter = NUM_BOATS;
+
+    for (Boat b: boats)
+    {
+      if (b.isLocationSet() && b.isDirectionSet())
+        counter--;
+    }
+
+    return counter;
   }
 
   public void chooseBoatPosition(Boat b, int row, int col, int direction) {
       b.setLocation(row, col);
       b.setDirection(direction);
-     // playerBoard.addBoat(b);
+      playerBoard.addBoat(b);
   }
 
 
