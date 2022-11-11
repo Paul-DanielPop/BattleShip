@@ -19,8 +19,25 @@ public class Game {
   public Player getPlayer1(){return p1;}
   public Player getPlayer2(){return p2;}
 
-  private static String askForGuess(Player p1, Player p2) {
-    return "a";
+  protected boolean askForGuess(Player p, Player opp, int row, int col) {
+    if(opp.getPlayerBoard().hasShip(row,col))
+    {
+      p.getOppBoard().markHit(row,col);
+      opp.getPlayerBoard().markHit(row,col);
+      return true;
+    }
+    else{
+      p.getOppBoard().markMiss(row, col);
+      opp.getPlayerBoard().markMiss(row,col);
+      return false;
+    }
+  }
+
+  protected boolean validParams(int row, int col)
+  {
+    if(col>=0 && col<=9 && row!=-1)
+      return true;
+    return false; //no valids, tornar a inserir params
   }
 
 
@@ -68,62 +85,19 @@ public class Game {
     return false;
   }
 
-  public void setup(Player p){
-    p.getPlayerBoard().printMethod();
-    System.out.println();
-    int counter = 1;
-    int normalCounter = 0;
+  public void setup(Player p, int row, int col, int dir, int normCounter){
+    p.getBoats().get(normCounter).setLocation(col,row); // x,y (x columnes, y files)
+    p.getBoats().get(normCounter).setDirection(dir);
 
-    while(p.numBoatsAlive() > 0){
-      for (Boat boat: p.getBoats()){
-        System.out.println("\nBoat #" + counter + ": Length-" + boat.getLength());
-        int row = -1;
-        int col = -1;
-        int dir = -1;
-        while (true){
-          System.out.print("Type in row (A-J): ");
-          String userInputRow = reader.next();
-          userInputRow = userInputRow.toUpperCase();
-          row = convertLetterToInt(userInputRow);
-
-          System.out.print("Type in column (1-10): ");
-          col = reader.nextInt();
-          col = convertInputToGameIndex(col);
-
-          System.out.print("Type in direction (0-H, 1-V): ");
-          dir = reader.nextInt();
-
-          if (col >= 0 && col <= 9 && row != -1 && dir != -1) // Check valid input
-          {
-            if (!hasErrors(row, col, dir, p, normalCounter)) // Check if errors will produce (out of bounds)
-            {
-              break;
-            }
-          }
-
-          System.out.println("Invalid location!");
-        }
-
-        p.getBoats().get(normalCounter).setLocation(row, col);
-        p.getBoats().get(normalCounter).setDirection(dir);
-        p.getPlayerBoard().addBoat(p.getBoats().get(normalCounter));
-        p.getPlayerBoard().printMethod();
-        System.out.println();
-        System.out.println("You have " + p.numBoatsAlive() + " remaining ships to place.");
-
-        normalCounter++;
-        counter++;
-      }
-    }
+    Boat boat = p.getBoats().get(normCounter);
+    p.getPlayerBoard().addBoat(boat);
   }
 
   public int accessConvertLetterToInt(String input){
     return convertLetterToInt(input);
   }
 
-  public int accessConvertInputToGameIndex(int input){
-    return convertInputToGameIndex(input);
-  }
+  //public int accessConvertInputToGameIndex(int input){return convertInputToGameIndex(input);}
 
   private int convertLetterToInt(String input) {
     int toReturn = -1;
@@ -156,7 +130,7 @@ public class Game {
     return toReturn;
   }
 
-  private int convertInputToGameIndex(int input){
+  /*private int convertInputToGameIndex(int input){
     int toReturn = -1;
     switch (input)
     {
@@ -185,5 +159,5 @@ public class Game {
     }
 
     return toReturn;
-  }
+  }*/
 }

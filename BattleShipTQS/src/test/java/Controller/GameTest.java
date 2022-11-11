@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Boat;
 import Model.Player;
+import View.Board;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,9 +10,32 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameTest {
     @Test
     void askForGuess(){
-        Player p1 = new Player("Player1");
-        Player p2 = new Player("Player2");
+        Game g = new Game();
+        Boat b = new Boat(3);
+        b.setLocation(0,0);
+        b.setDirection(0);  //horizontal
+        g.getPlayer1().getPlayerBoard().addBoat(b);
 
+        assertTrue(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,0));
+        assertTrue(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,2));
+        assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),1,0));
+        assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,3));
+        assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),1,1));
+
+
+    }
+
+
+
+
+    @Test
+    void validParams(){
+        //decision coverage+condition coverage
+        Game g = new Game();
+        assertTrue(g.validParams(0,0));
+        assertFalse(g.validParams(-1,12));
+        assertFalse(g.validParams(4,-2));
+        assertFalse(g.validParams(5,10));
     }
 
 
@@ -51,18 +75,16 @@ class GameTest {
     @Test
     void convertLetterToInt(){
         Game game = new Game();
+        String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
-        int n1 = game.accessConvertLetterToInt("A");
-        assertTrue(n1 == 0);
-
-        int n2 = game.accessConvertLetterToInt("J");
-        assertTrue(n2 == 9);
-
-        int n3 = game.accessConvertLetterToInt("K");
-        assertTrue(n3 == -1);
+        for (int i = 0; i < 10; i++){
+            int n = game.accessConvertLetterToInt(letters[i]);
+            assertTrue(n == i);
+        }
+        assertTrue(game.accessConvertLetterToInt("M")==-1);
     }
 
-    @Test
+   /* @Test
     void convertInputToGameIndex(){
         Game game = new Game();
 
@@ -77,12 +99,34 @@ class GameTest {
 
         int n4 = game.accessConvertInputToGameIndex(-1);
         assertTrue(n4 == -1);
-    }
+    }*/
 
     @Test
     void setup(){
         Game game = new Game();
-        Player player = new Player("Paul");
+        Board board = game.getPlayer1().getPlayerBoard();
+        Boat boat = game.getPlayer1().getBoats().get(0);
+
+        assertFalse(boat.getDirection()==0); //horizontal
+        assertFalse(boat.getCoordX()==0);
+        assertFalse(boat.getCoordY()==1);
+        assertFalse(board.hasShip(1,0));
+        assertFalse(board.hasShip(1,1));
+        assertFalse(board.hasShip(1,2));
+        assertFalse(board.hasShip(1,3));
+        assertFalse(board.hasShip(2,0));
+
+        game.setup(game.getPlayer1(),1,0,0,0);
+
+        assertTrue(boat.getDirection()==0); //horizontal
+        assertTrue(boat.getCoordX()==0);
+        assertTrue(boat.getCoordY()==1);
+        assertTrue(board.hasShip(1,0));
+        assertTrue(board.hasShip(1,1));
+        assertTrue(board.hasShip(1,2));
+        assertFalse(board.hasShip(1,3));
+        assertFalse(board.hasShip(2,0));
+
     }
 
 }
