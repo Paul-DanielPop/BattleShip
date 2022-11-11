@@ -112,6 +112,7 @@ public class Board {
         else if (board[i][j].checkHit())
           System.out.print("X ");
       }
+      System.out.println();
     }
 
   }
