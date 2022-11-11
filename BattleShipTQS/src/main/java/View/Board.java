@@ -73,7 +73,8 @@ public class Board {
         setLengthOfBoat(row, i, length);
         setDirectionOfBoat(row, i, dir);
       }
-    }else if(dir==1)
+    }
+    if(dir==1)
     {
       for(int i=row; i<row+length;i++)
       {
