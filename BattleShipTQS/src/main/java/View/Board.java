@@ -9,8 +9,8 @@ public class Board {
   private int points;
 
   // Constants for number of rows and columns.
-  public static final int NUM_ROWS = 10;
-  public static final int NUM_COLS = 10;
+  private static final int NUM_ROWS = 10;
+  private static final int NUM_COLS = 10;
 
   public Board()
   {
@@ -26,6 +26,8 @@ public class Board {
     }
   }
 
+  public int getNumRows(){ return NUM_ROWS; }
+  public int getNumCols(){ return NUM_COLS; }
   public Location get(int row, int col){ return board[row][col]; }
   public int getPoints() { return points;}
 
@@ -67,17 +69,17 @@ public class Board {
 
     if(dir == 0){
       for(int i=col; i<col+length;i++){
-        board[row][i].setShip(true);
-        board[row][i].setLengthOfShip(length);
-        board[row][i].setDirectionOfShip(dir);
+        setShip(row, i, true);
+        setLengthOfBoat(row, i, length);
+        setDirectionOfBoat(row, i, dir);
       }
     }else if(dir==1)
     {
       for(int i=row; i<row+length;i++)
       {
-        board[i][col].setShip(true);
-        board[i][col].setLengthOfShip(length);
-        board[i][col].setDirectionOfShip(dir);
+        setShip(i, col, true);
+        setLengthOfBoat(i, col, length);
+        setDirectionOfBoat(i, col, dir);
       }
     }
 
@@ -87,52 +89,92 @@ public class Board {
   {
     board[row][col].setShip(val);
   }
-
+  public void setLengthOfBoat(int row, int col, int length){ board[row][col].setLengthOfShip(length); }
+  public  void setDirectionOfBoat(int row, int col, int dir){ board[row][col].setDirectionOfShip(dir); }
   public boolean hasShip(int row, int col)
   {
     return board[row][col].hasShip();
   }
 
+  public void printStatus() {
 
+    printHeader();
 
-  public void printMethod(){
+    for (int i = 0; i < NUM_ROWS; i++) {
+      System.out.print(switchIntToChar(i) + "\t");
+      for (int j = 0; j < NUM_COLS; j++) {
 
-    System.out.print("\t");
-    for (int i = 1; i <= NUM_COLS; i++)
-    {
-      System.out.print(i + " ");
+        if (board[i][j].isUnguessed())
+          System.out.print("- ");
+        else if (board[i][j].checkMiss())
+          System.out.print("O ");
+        else if (board[i][j].checkHit())
+          System.out.print("X ");
+      }
     }
-    System.out.println();
 
-    for (int i = 0; i < NUM_ROWS; i++){
+  }
+
+  public void printBoats() {
+
+    printHeader();
+
+    for (int i = 0; i < NUM_ROWS; i++) {
       System.out.print(switchIntToChar(i) + "\t");
 
-      for (int j = 0; j < NUM_COLS; j++)
-      {
+      for (int j = 0; j < NUM_COLS; j++) {
+
+        if (board[i][j].hasShip()) {
+          if (board[i][j].getLengthOfShip() == 3) {
+            System.out.print("T ");
+          }
+          else if (board[i][j].getLengthOfShip() == 4) {
+            System.out.print("Q ");
+          }
+          else if (board[i][j].getLengthOfShip() == 5) {
+            System.out.print("M ");
+          }
+          else if (board[i][j].getLengthOfShip() == 6) {
+            System.out.print("S ");
+          }
+        }
+        else if (!(board[i][j].hasShip())) {
+          System.out.print("- ");
+        }
+      }
+    }
+
+  }
+
+  public void printMethod() {
+
+    printHeader();
+
+    for (int i = 0; i < NUM_ROWS; i++) {
+      System.out.print(switchIntToChar(i) + "\t");
+
+      for (int j = 0; j < NUM_COLS; j++) {
         if (board[i][j].checkHit())
           System.out.print("X ");
-        else if (board[i][j].hasShip())
-        {
-          // System.out.print("X ");
-          if (board[i][j].getLengthOfShip() == 2)
+        else if (board[i][j].hasShip()) {
+          if (board[i][j].getLengthOfShip() == 3)
           {
-            System.out.print("D ");
-          }
-          else if (board[i][j].getLengthOfShip() == 3)
-          {
-            System.out.print("C ");
+            System.out.print("T ");
           }
           else if (board[i][j].getLengthOfShip() == 4)
           {
-            System.out.print("B ");
+            System.out.print("Q ");
           }
           else if (board[i][j].getLengthOfShip() == 5)
           {
-            System.out.print("A ");
+            System.out.print("M ");
+          }
+          else if (board[i][j].getLengthOfShip() == 6)
+          {
+            System.out.print("S ");
           }
         }
-        else if (!(board[i][j].hasShip()))
-        {
+        else if (!(board[i][j].hasShip())) {
           System.out.print("- ");
         }
 
@@ -142,45 +184,55 @@ public class Board {
     System.out.println();
   }
 
-  public char switchIntToChar(int x){
-    char res;
 
-    switch (x){
-      case 0:
-        res = 'A';
-        break;
-      case 1:
-        res = 'B';
-        break;
-      case 2:
-        res = 'C';
-        break;
-      case 3:
-        res = 'D';
-        break;
-      case 4:
-        res = 'E';
-        break;
-      case 5:
-        res = 'F';
-        break;
-      case 6:
-        res = 'G';
-        break;
-      case 7:
-        res = 'H';
-        break;
-      case 8:
-        res = 'I';
-        break;
-      case 9:
-        res = 'J';
-        break;
-      default:
-        return 'Z';
+  private void printHeader() {
+    System.out.print("\t");
+    for (int i = 1; i <= NUM_COLS; i++) {
+      System.out.print(i + " ");
     }
-
-    return res;
+    System.out.println();
   }
 
+
+    public char switchIntToChar(int x){
+      char res;
+
+      switch (x) {
+        case 0:
+          res = 'A';
+          break;
+        case 1:
+          res = 'B';
+          break;
+        case 2:
+          res = 'C';
+          break;
+        case 3:
+          res = 'D';
+          break;
+        case 4:
+          res = 'E';
+          break;
+        case 5:
+          res = 'F';
+          break;
+        case 6:
+          res = 'G';
+          break;
+        case 7:
+          res = 'H';
+          break;
+        case 8:
+          res = 'I';
+          break;
+        case 9:
+          res = 'J';
+          break;
+        default:
+          return 'Z';
+      }
+
+      return res;
+    }
 }
+

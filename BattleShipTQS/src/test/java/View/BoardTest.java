@@ -11,6 +11,12 @@ class BoardTest {
   void testBoardConstructor(){
     Board board = new Board();
 
+    for (int row = 0; row < board.getNumRows(); row++){
+      for (int col = 0; col < board.getNumCols(); col++){
+        assertTrue(board.getStatus(row,col) == 0);
+      }
+    }
+
   }
 
   @Test
@@ -69,38 +75,54 @@ class BoardTest {
     Boat boat = new Boat(3);
     boat.setDirection(Boat.VERTICAL);
     boat.setLocation(0,0);
-    Location l1 = b.get(0,0);
-    Location l2 = b.get(1,0);
-    Location l3 = b.get(2,0);
-    Location l4 = b.get(3,0);
-    Location l5 = b.get(0,6);
 
-    assertFalse(l1.hasShip());
-    assertFalse(l2.hasShip());
-    assertFalse(l3.hasShip());
-    assertFalse(l4.hasShip());
-    assertFalse(l5.hasShip());
+    assertFalse(b.hasShip(0,0));
+    assertFalse(b.hasShip(1,0));
+    assertFalse(b.hasShip(2,0));
+    assertFalse(b.hasShip(3,0));
+    assertFalse(b.hasShip(0,6));
 
     b.addBoat(boat);
 
-    assertTrue(l1.hasShip());
-    assertTrue(l2.hasShip());
-    assertTrue(l3.hasShip());
-    assertFalse(l4.hasShip());
-    assertFalse(l5.hasShip());
+    assertTrue(b.hasShip(0,0));
+    assertTrue(b.hasShip(1,0));
+    assertTrue(b.hasShip(2,0));
+    assertFalse(b.hasShip(3,0));
+    assertFalse(b.hasShip(0,6));
 
+
+    Board b1 = new Board();
+    Boat boat1 = new Boat(4);
+    boat1.setDirection(Boat.HORIZONTAL);
+    boat1.setLocation(6,9);
+
+    assertFalse(b1.hasShip(9,6));
+    assertFalse(b1.hasShip(9,7));
+    assertFalse(b1.hasShip(9,8));
+    assertFalse(b1.hasShip(9,9));
+    assertFalse(b1.hasShip(9,5));
+
+    b1.addBoat(boat1);
+
+    assertTrue(b1.hasShip(9,6));
+    assertTrue(b1.hasShip(9,7));
+    assertTrue(b1.hasShip(9,8));
+    assertTrue(b1.hasShip(9,9));
+    assertFalse(b1.hasShip(9,5));
   }
 
   @Test
   void switchIntToChar(){
     Board b = new Board();
 
-    char n1 = b.switchIntToChar(0);
-    assertTrue(n1 == 'A');
-    char n2 = b.switchIntToChar(9);
-    assertTrue(n2 == 'J');
-    char n3 = b.switchIntToChar(12);
-    assertTrue(n3 == 'Z');
+    char[] letters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+
+    for (int i = 0; i < 10; i++){
+      char c = b.switchIntToChar(i);
+      assertTrue(c == letters[i]);
+    }
+    char c = b.switchIntToChar(12);
+    assertTrue(c == 'Z');
   }
 
 }
