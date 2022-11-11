@@ -8,32 +8,141 @@ import java.util.Scanner;
 public class Game {
 
   public static Scanner reader = new Scanner(System.in);
-  private Player p1;
-  private Player p2;
+  private static Player p1;
+  private static Player p2;
 
   public Game(){
     p1=new Player("player1");
     p2=new Player("player2");
   }
 
+  public static void main(String[] args) {
+    Game currentGame = new Game();
+
+    System.out.println("\nPlayer SETUP:");
+
+    while (p1.numBoatsAlive() > 0){
+      for (Boat boat: p1.getBoats()){
+        int row = -1;
+        int col = -1;
+        int dir = -1;
+        int normCounter = 0;
+        do {
+          p1.getPlayerBoard().printBoats();
+          System.out.print("Type in row (A-J): ");
+          String userInputRow = reader.next();
+          userInputRow = userInputRow.toUpperCase();
+          row = convertLetterToInt(userInputRow);
+
+
+          System.out.print("Type in column (0-9): ");
+          col = reader.nextInt();
+
+          System.out.print("Type in direction (0 = Horizontal, 1 = Vertical): ");
+          dir = reader.nextInt();
+
+        }while (!validParams(row, col) && dir != -1 && !hasErrors(row, col, dir, p1, normCounter));
+
+        setup(p1,row, col, dir, normCounter);
+        normCounter++;
+
+      }
+    }
+
+    while (p2.numBoatsAlive() > 0){
+      for (Boat boat: p2.getBoats()){
+        int row = -1;
+        int col = -1;
+        int dir = -1;
+        int normCounter = 0;
+        do {
+          p2.getPlayerBoard().printBoats();
+          System.out.print("Type in row (A-J): ");
+          String userInputRow = reader.next();
+          userInputRow = userInputRow.toUpperCase();
+          row = convertLetterToInt(userInputRow);
+
+
+          System.out.print("Type in column (0-9): ");
+          col = reader.nextInt();
+
+          System.out.print("Type in direction (0 = Horizontal, 1 = Vertical): ");
+          dir = reader.nextInt();
+
+        }while (!validParams(row, col) && dir != -1 && !hasErrors(row, col, dir, p2, normCounter));
+
+        setup(p2, row, col, dir, normCounter);
+        normCounter++;
+
+      }
+    }
+
+    do {
+      System.out.println("\nPlayer 1 makes guess:");
+      System.out.print("Type in row (A-J): ");
+      String userInputRow = reader.next();
+      userInputRow = userInputRow.toUpperCase();
+      int row = convertLetterToInt(userInputRow);
+
+      System.out.print("Type in column (0-9): ");
+      int col = reader.nextInt();
+
+      if (askForGuess(p1, p2, row, col)){
+        System.out.print("Hit on:\t" + "row=\t" + row + "\tcol=\t" + col);
+      }
+      else{
+        System.out.print("Miss on:\t" + "row=\t" + row + "\tcol=\t" + col);
+      }
+
+      System.out.println("\nPlayer 2 makes guess:");
+      System.out.print("Type in row (A-J): ");
+      String userInputRow2 = reader.next();
+      userInputRow2 = userInputRow2.toUpperCase();
+      int row2 = convertLetterToInt(userInputRow2);
+
+      System.out.print("Type in column (0-9): ");
+      int col2 = reader.nextInt();
+
+      if (askForGuess(p1, p2, row2, col2)){
+        System.out.print("Hit on:\t" + "row=\t" + row2 + "\tcol=\t" + col2);
+      }
+      else{
+        System.out.print("Miss on:\t" + "row=\t" + row2 + "\tcol=\t" + col2);
+      }
+
+    }while(!p1.getPlayerBoard().hasLost() || !p2.getPlayerBoard().hasLost());
+
+    if(p1.getPlayerBoard().hasLost()){
+      System.out.println("Player 2 HAS WON!");
+      p2.getOppBoard().printMethod();
+    }
+
+    if(p2.getPlayerBoard().hasLost()){
+      System.out.println("Player 1 HAS WON!");
+      p1.getOppBoard().printMethod();
+    }
+
+  }
   public Player getPlayer1(){return p1;}
   public Player getPlayer2(){return p2;}
 
-  protected boolean askForGuess(Player p, Player opp, int row, int col) {
+  protected static boolean askForGuess(Player p, Player opp, int row, int col) {
     if(opp.getPlayerBoard().hasShip(row,col))
     {
       p.getOppBoard().markHit(row,col);
       opp.getPlayerBoard().markHit(row,col);
+      p.getOppBoard().printStatus();
       return true;
     }
     else{
       p.getOppBoard().markMiss(row, col);
       opp.getPlayerBoard().markMiss(row,col);
+      p.getOppBoard().printStatus();
       return false;
     }
   }
 
-  protected boolean validParams(int row, int col)
+  protected static boolean validParams(int row, int col)
   {
     if(col>=0 && col<=9 && row!=-1)
       return true;
@@ -85,12 +194,10 @@ public class Game {
     return false;
   }
 
-  public void setup(Player p, int row, int col, int dir, int normCounter){
-    p.getBoats().get(normCounter).setLocation(col,row); // x,y (x columnes, y files)
-    p.getBoats().get(normCounter).setDirection(dir);
-
-    Boat boat = p.getBoats().get(normCounter);
-    p.getPlayerBoard().addBoat(boat);
+  public static void setup(Player p, int row, int col, int dir, int normCounter){
+    p.chooseBoatPosition(p.getBoats().get(normCounter), row, col, dir);
+    p.getPlayerBoard().printBoats();
+    System.out.println("You have " + p.numBoatsAlive() + " remaining ships to place.");
   }
 
   public int accessConvertLetterToInt(String input){
@@ -99,7 +206,7 @@ public class Game {
 
   //public int accessConvertInputToGameIndex(int input){return convertInputToGameIndex(input);}
 
-  private int convertLetterToInt(String input) {
+  private static int convertLetterToInt(String input) {
     int toReturn = -1;
     switch (input)
     {

@@ -142,7 +142,9 @@ public class Board {
         else if (!(board[i][j].hasShip())) {
           System.out.print("- ");
         }
+
       }
+      System.out.println();
     }
 
   }
@@ -188,7 +190,7 @@ public class Board {
 
   private void printHeader() {
     System.out.print("\t");
-    for (int i = 1; i <= NUM_COLS; i++) {
+    for (int i = 0; i < NUM_COLS; i++) {
       System.out.print(i + " ");
     }
     System.out.println();
