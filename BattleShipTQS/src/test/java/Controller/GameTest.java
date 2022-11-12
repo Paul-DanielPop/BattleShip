@@ -42,13 +42,19 @@ class GameTest {
     @Test
     void hasErrors(){
         Player p = new Player("joan");
+        Boat b0 = new Boat(3);
+        Boat b1 = new Boat(4);
+        Boat b2 = new Boat(5);
+        Boat b3 = new Boat(6);
         Game game = new Game();
+
+
         assertTrue(p.boats.get(0).getLength()==3);
-        assertTrue(game.hasErrors(0,8,0,p,0));
-        assertTrue(game.hasErrors(8,0,1,p,0));
-        assertFalse(game.hasErrors(7,0,1,p,0));
-        assertFalse(game.hasErrors(0,7,0,p,0));
-        assertTrue(game.hasErrors(0,6,0,p,3));
+        assertTrue(game.hasErrors(0,8,0,p,b0));
+        assertTrue(game.hasErrors(8,0,1,p,b0));
+        assertFalse(game.hasErrors(7,0,1,p,b0));
+        assertFalse(game.hasErrors(0,7,0,p,b0));
+        assertTrue(game.hasErrors(0,6,0,p,b3));
 
 
 
@@ -56,18 +62,18 @@ class GameTest {
         b.setDirection(0); //horitzontal
         b.setLocation(2,2);
         game.getPlayer1().getPlayerBoard().addBoat(b);
-        assertTrue(game.hasErrors(0,3,1,game.getPlayer1(),0));
-        assertFalse(game.hasErrors(1,6,1,game.getPlayer1(),0));
-        assertFalse(game.hasErrors(1,1,1,game.getPlayer1(),0));
-        assertFalse(game.hasErrors(2,6,0,game.getPlayer1(),0));
+        assertTrue(game.hasErrors(0,3,1,game.getPlayer1(),b0));
+        assertFalse(game.hasErrors(1,6,1,game.getPlayer1(),b0));
+        assertFalse(game.hasErrors(1,1,1,game.getPlayer1(),b0));
+        assertFalse(game.hasErrors(2,6,0,game.getPlayer1(),b0));
 
         b.setDirection(1); //vertical
         b.setLocation(3,2);
         game.getPlayer2().getPlayerBoard().addBoat(b);
-        assertFalse(game.hasErrors(3,0,0,game.getPlayer2(),0));
-        assertTrue(game.hasErrors(5,0,0,game.getPlayer2(),1));
-        assertFalse(game.hasErrors(6,0,0,game.getPlayer2(),1));
-        assertTrue(game.hasErrors(3,0,0,game.getPlayer2(),1));
+        assertFalse(game.hasErrors(3,0,0,game.getPlayer2(),b0));
+        assertTrue(game.hasErrors(5,0,0,game.getPlayer2(),b1));
+        assertFalse(game.hasErrors(6,0,0,game.getPlayer2(),b1));
+        assertTrue(game.hasErrors(3,0,0,game.getPlayer2(),b1));
 
     }
 
@@ -84,22 +90,6 @@ class GameTest {
         assertTrue(game.accessConvertLetterToInt("M")==-1);
     }
 
-   /* @Test
-    void convertInputToGameIndex(){
-        Game game = new Game();
-
-        int n1 = game.accessConvertInputToGameIndex(1);
-        assertTrue(n1 == 0);
-
-        int n2 = game.accessConvertInputToGameIndex(10);
-        assertTrue(n2 == 9);
-
-        int n3 = game.accessConvertInputToGameIndex(11);
-        assertTrue(n3 == -1);
-
-        int n4 = game.accessConvertInputToGameIndex(-1);
-        assertTrue(n4 == -1);
-    }*/
 
     @Test
     void setup(){
@@ -116,7 +106,7 @@ class GameTest {
         assertFalse(board.hasShip(1,3));
         assertFalse(board.hasShip(2,0));
 
-        game.setup(game.getPlayer1(),1,0,0,0);
+        game.setup(game.getPlayer1(),1,0,0,boat);
 
         assertTrue(boat.getDirection()==0); //horizontal
         assertTrue(boat.getCoordX()==0);

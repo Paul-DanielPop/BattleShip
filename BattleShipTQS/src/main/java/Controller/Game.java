@@ -3,6 +3,8 @@ package Controller;
 import Model.Boat;
 import Model.Player;
 
+
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Game {
@@ -55,6 +57,7 @@ public class Game {
 
       }
     }
+    clrscr();
 
     while (p2.numBoatsAlive() > 0){
       for (Boat boat: p2.getBoats()){
@@ -86,8 +89,8 @@ public class Game {
 
       }
     }
-
     do {
+      clrscr();
       boolean valid = false;
       int row = 0;
       int col = 0;
@@ -105,16 +108,17 @@ public class Game {
           valid = true;
       }
 
-
+      clrscr();
       if (askForGuess(p1, p2, row, col)) {
-        System.out.print("Hit on:\t" + "row=\t" + row + "\tcol=\t" + col);
+        System.out.print("Hit on:\t" + "row=\t" + row + "\tcol=\t" + col + "\n");
       } else {
-        System.out.print("Miss on:\t" + "row=\t" + row + "\tcol=\t" + col);
+        System.out.print("Miss on:\t" + "row=\t" + row + "\tcol=\t" + col + "\n");
       }
 
+
       valid = false;
-      int row2=0;
-      int col2=0;
+      int row2 = 0;
+      int col2 = 0;
       while (!valid){
         p2.getOppBoard().printStatus();
         System.out.println("\nPlayer 2 makes guess:");
@@ -129,10 +133,10 @@ public class Game {
           valid=true;
       }
       if (askForGuess(p2, p1, row2, col2)){
-        System.out.print("Hit on:\t" + "row=\t" + row2 + "\tcol=\t" + col2);
+        System.out.print("Hit on:\t" + "row=\t" + row2 + "\tcol=\t" + col2 + "\n");
       }
       else{
-        System.out.print("Miss on:\t" + "row=\t" + row2 + "\tcol=\t" + col2);
+        System.out.print("Miss on:\t" + "row=\t" + row2 + "\tcol=\t" + col2 + "\n");
       }
 
     }while(!p1.getPlayerBoard().hasLost() && !p2.getPlayerBoard().hasLost());
@@ -156,13 +160,11 @@ public class Game {
     {
       p.getOppBoard().markHit(row,col);
       opp.getPlayerBoard().markHit(row,col);
-      p.getOppBoard().printStatus();
       return true;
     }
     else{
       p.getOppBoard().markMiss(row, col);
       opp.getPlayerBoard().markMiss(row,col);
-      p.getOppBoard().printStatus();
       return false;
     }
   }
@@ -262,34 +264,20 @@ public class Game {
     return toReturn;
   }
 
-  /*private int convertInputToGameIndex(int input){
-    int toReturn = -1;
-    switch (input)
-    {
-      case 1:   toReturn = 0;
-        break;
-      case 2:   toReturn = 1;
-        break;
-      case 3:   toReturn = 2;
-        break;
-      case 4:   toReturn = 3;
-        break;
-      case 5:   toReturn = 4;
-        break;
-      case 6:   toReturn = 5;
-        break;
-      case 7:   toReturn = 6;
-        break;
-      case 8:   toReturn = 7;
-        break;
-      case 9:   toReturn = 8;
-        break;
-      case 10:   toReturn = 9;
-        break;
-      default:    toReturn = -1;
-        break;
-    }
+  public static void clrscr() {
+    //limpiar screen
+    //Clears Screen in java
 
-    return toReturn;
-  }*/
+    try {
+
+      if (System.getProperty("os.name").contains("Windows"))
+
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+
+      else
+
+        Runtime.getRuntime().exec("clear");
+
+    } catch (IOException | InterruptedException ex) {}
+  }
 }
