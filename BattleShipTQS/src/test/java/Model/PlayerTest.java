@@ -2,8 +2,6 @@ package Model;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.annotation.Annotation;
-import java.util.List;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,50 +12,77 @@ class PlayerTest{
     void testPlayerConstructor(){
         Player p = new Player("Carles");
 
-        assertTrue(p.hasWon()==false);
-        assertTrue(p.getBoats().size() == 4);
-        assertTrue(p.getPlayerBoard()!=null);
-        assertTrue(p.getOppBoard()!=null);
-        assertTrue(p.getName()=="Carles");
-        ArrayList boats= p.getBoats();
+        assertFalse(p.hasWon());
+        assertEquals(4, p.getBoats().size());
+        assertNotNull(p.getPlayerBoard());
+        assertNotNull(p.getOppBoard());
+        assertSame("Carles", p.getName());
+        ArrayList<Boat> boats= p.getBoats();
         Boat boat = (Boat) boats.get(0);
-        assertTrue(boat.getLength()==3);
+        assertEquals(3, boat.getLength());
 
 
     }
 
+
+    //CAJA NEGRA
+    @Test
+    void numBoatsLeftToSet(){
+        Player player = new Player("Carles");
+        Player player2 = new Player("Player2");
+
+        for (Boat boat : player2.getBoats()) {
+            player2.chooseBoatPosition(boat,23,12,4);
+            assertEquals(4,player.numBoatsLeftToSet());
+
+        }
+
+        assertNotEquals(5,player.numBoatsLeftToSet());
+        assertEquals(4,player.numBoatsLeftToSet());
+        player.chooseBoatPosition(player.getBoats().get(0), 0, 0, 0);
+        assertEquals(3, player.numBoatsLeftToSet());
+        player.chooseBoatPosition(player.getBoats().get(1), 1, 0, 0);
+        assertEquals(2, player.numBoatsLeftToSet());
+        player.chooseBoatPosition(player.getBoats().get(2), 2, 0, 0);
+        assertEquals(1, player.numBoatsLeftToSet());
+        player.chooseBoatPosition(player.getBoats().get(3), 3, 0, 0);
+        assertEquals(0, player.numBoatsLeftToSet());
+        assertNotEquals(-1,player.numBoatsLeftToSet());
+    }
     @Test
     void chooseBoatPosition() {
-        Player player = new Player("Carles");
+        Player carles = new Player("Carles");
+        Player joan = new Player("Joan");
+        //pairwise seria de 100 combinaciones
+        carles.chooseBoatPosition(carles.getBoats().get(0), 0, 0, 0);
+        carles.chooseBoatPosition(carles.getBoats().get(1), 4, 0, 0);
+        carles.chooseBoatPosition(carles.getBoats().get(2), 6, 0, 0);
+        carles.chooseBoatPosition(carles.getBoats().get(3), 9, 0, 0);
 
-        player.chooseBoatPosition(player.getBoats().get(0), 0, 0, 0);
-        assertTrue(player.numBoatsAlive() == 3);
-        player.chooseBoatPosition(player.getBoats().get(1), 1, 0, 0);
-        assertTrue(player.numBoatsAlive() == 2);
-        player.chooseBoatPosition(player.getBoats().get(2), 2, 0, 0);
-        assertTrue(player.numBoatsAlive() == 1);
-        player.chooseBoatPosition(player.getBoats().get(3), 3, 0, 0);
-        assertTrue(player.numBoatsAlive() == 0);
+        joan.chooseBoatPosition(joan.getBoats().get(0), 0, 0, 1);
+        joan.chooseBoatPosition(joan.getBoats().get(1), 0, 4, 1);
+        joan.chooseBoatPosition(joan.getBoats().get(2), 0, 6, 1);
+        joan.chooseBoatPosition(joan.getBoats().get(3), 0, 9, 1);
 
-        assertTrue(player.getBoats().get(0).getDirection() == 0);
-        assertTrue(player.getBoats().get(0).getCoordX() == 0);
-        assertTrue(player.getBoats().get(0).getCoordY() == 0);
+        assertEquals(0, carles.getBoats().get(0).getDirection());
+        assertEquals(0, carles.getBoats().get(0).getCoordX());
+        assertEquals(0, carles.getBoats().get(0).getCoordY());
 
-        assertTrue(player.getBoats().get(1).getDirection() == 0);
-        assertTrue(player.getBoats().get(1).getCoordX() == 0);
-        assertTrue(player.getBoats().get(1).getCoordY() == 1);
+        assertEquals(0, carles.getBoats().get(1).getDirection());
+        assertEquals(0, carles.getBoats().get(1).getCoordX());
+        assertEquals(4, carles.getBoats().get(1).getCoordY());
 
-        assertTrue(player.getBoats().get(2).getDirection() == 0);
-        assertTrue(player.getBoats().get(2).getCoordX() == 0);
-        assertTrue(player.getBoats().get(2).getCoordY() == 2);
+        assertEquals(0, carles.getBoats().get(2).getDirection());
+        assertEquals(0, carles.getBoats().get(2).getCoordX());
+        assertEquals(6, carles.getBoats().get(2).getCoordY());
 
-        assertTrue(player.getBoats().get(3).getDirection() == 0);
-        assertTrue(player.getBoats().get(3).getCoordX() == 0);
-        assertTrue(player.getBoats().get(3).getCoordY() == 3);
+        assertEquals(0, carles.getBoats().get(3).getDirection());
+        assertEquals(0, carles.getBoats().get(3).getCoordX());
+        assertEquals(9, carles.getBoats().get(3).getCoordY());
 
-        assertTrue(player.getPlayerBoard().hasShip(0,0));
-        assertTrue(player.getPlayerBoard().hasShip(1,0));
-        assertTrue(player.getPlayerBoard().hasShip(2,0));
-        assertTrue(player.getPlayerBoard().hasShip(3,0));
+        assertTrue(carles.getPlayerBoard().hasShip(0,0));
+        assertTrue(carles.getPlayerBoard().hasShip(4,0));
+        assertTrue(carles.getPlayerBoard().hasShip(6,0));
+        assertTrue(carles.getPlayerBoard().hasShip(9,0));
     }
 }

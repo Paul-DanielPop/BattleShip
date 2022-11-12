@@ -11,20 +11,20 @@ class LocationTest {
   void testLocationConstructor(){
     location = new Location();
 
-    assertTrue(location.getStatus() == 0);
-    assertTrue(location.hasShip() == false);
-    assertTrue(location.getLengthOfShip() == -1);
-    assertTrue(location.getDirectionOfShip() == -1);
+    assertEquals(0, location.getStatus());
+    assertFalse(location.hasShip());
+    assertEquals(-1, location.getLengthOfShip());
+    assertEquals(-1, location.getDirectionOfShip());
   }
   @Test
   void checkHit() {
     location = new Location();
 
-    assertTrue(location.checkHit() == false);
-    assertTrue(location.getStatus() == 0);
+    assertFalse(location.checkHit());
+    assertEquals(0, location.getStatus());
     location.markHit();
-    assertTrue(location.checkHit() == true);
-    assertTrue(location.getStatus() == 1);
+    assertTrue(location.checkHit());
+    assertEquals(1, location.getStatus());
     assertFalse(location.getStatus() != 1);
   }
 
@@ -32,11 +32,11 @@ class LocationTest {
   void checkMiss() {
     location = new Location();
 
-    assertTrue(location.checkMiss() == false);
-    assertTrue(location.getStatus() == 0);
+    assertFalse(location.checkMiss());
+    assertEquals(0, location.getStatus());
     location.markMiss();
-    assertTrue(location.checkMiss() == true);
-    assertTrue(location.getStatus() == 2);
+    assertTrue(location.checkMiss());
+    assertEquals(2, location.getStatus());
     assertFalse(location.getStatus() != 2);
   }
 
@@ -44,13 +44,13 @@ class LocationTest {
   void isUnguessed() {
     location = new Location();
 
-    assertTrue(location.isUnguessed() == true);
-    assertTrue(location.getStatus() == 0);
+    assertTrue(location.isUnguessed());
+    assertEquals(0, location.getStatus());
     location.markMiss();
-    assertTrue(location.isUnguessed() == false);
+    assertFalse(location.isUnguessed());
     location.markHit();
-    assertTrue(location.isUnguessed() == false);
-    assertTrue(location.isUnguessed() == false);
+    assertFalse(location.isUnguessed());
+    assertFalse(location.isUnguessed());
   }
 
 
@@ -58,10 +58,25 @@ class LocationTest {
   void hasShip() {
     location = new Location();
 
-    assertTrue(location.hasShip() == false);
+    assertFalse(location.hasShip());
     location.setShip(true);
-    assertTrue(location.hasShip() == true);
+    assertTrue(location.hasShip());
     location.setShip(false);
-    assertTrue(location.hasShip() == false);
+    assertFalse(location.hasShip());
+  }
+
+  @Test
+  void setStatus(){
+    location = new Location();
+
+    location.setStatus(Location.HIT);
+    assertEquals(Location.HIT,location.getStatus());
+    location.setStatus(Location.MISSED);
+    assertEquals(Location.MISSED,location.getStatus());
+    location.setStatus(3);
+    assertEquals(Location.UNGUESSED,location.getStatus());
+    location.setStatus(-1);
+    assertEquals(Location.UNGUESSED,location.getStatus());
+
   }
 }

@@ -10,7 +10,7 @@ public class Player {
   private String name;
 
 
-  public ArrayList<Boat> boats;
+  private ArrayList<Boat> boats;
   private boolean winner;
 
   private Board playerBoard;
@@ -41,12 +41,7 @@ public class Player {
   public Board getPlayerBoard() {return playerBoard;}
   public Board getOppBoard() {return oppBoard;}
 
-//  public void addBoats(){
-//   for (Boat b : boats)
-//     playerBoard.addBoat(b);
-//  }
-
-  public int numBoatsAlive(){
+  public int numBoatsLeftToSet(){
     int counter = NUM_BOATS;
 
     for (Boat b: boats)

@@ -23,7 +23,7 @@ public class Game {
 
     System.out.println("\nPlayer SETUP:");
 
-    while (p1.numBoatsAlive() > 0){
+    while (p1.numBoatsLeftToSet() > 0){
       for (Boat boat: p1.getBoats()){
         int row = -1;
         int col = -1;
@@ -59,7 +59,7 @@ public class Game {
     }
     clrscr();
 
-    while (p2.numBoatsAlive() > 0){
+    while (p2.numBoatsLeftToSet() > 0){
       for (Boat boat: p2.getBoats()){
         int row = -1;
         int col = -1;
@@ -224,7 +224,7 @@ public class Game {
   public static void setup(Player p, int row, int col, int dir, Boat b){
     p.chooseBoatPosition(b, row, col, dir);
     p.getPlayerBoard().printBoats();
-    System.out.println("You have " + p.numBoatsAlive() + " remaining ships to place.");
+    System.out.println("You have " + p.numBoatsLeftToSet() + " remaining ships to place.");
   }
 
   public int accessConvertLetterToInt(String input){

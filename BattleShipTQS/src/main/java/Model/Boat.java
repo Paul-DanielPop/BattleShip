@@ -31,17 +31,11 @@ public class Boat {
 
 
   public boolean isLocationSet(){
-    if (coordX != UNSET && coordY != UNSET)
-      return true;
-    else
-      return false;
+    return coordX != UNSET && coordY != UNSET;
   }
 
   public boolean isDirectionSet(){
-    if(direction != UNSET)
-      return true;
-    else
-      return false;
+    return direction != UNSET;
   }
 
   public boolean getHundido() {

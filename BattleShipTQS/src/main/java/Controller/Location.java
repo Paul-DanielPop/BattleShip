@@ -20,24 +20,15 @@ public class Location {
   }
 
   public boolean checkHit() {
-    if (status == HIT)
-      return true;
-    else
-      return false;
+    return status == HIT;
   }
 
   public boolean checkMiss() {
-    if (status == MISSED)
-      return true;
-    else
-      return false;
+    return status == MISSED;
   }
 
   public boolean isUnguessed() {
-    if (status == UNGUESSED)
-      return true;
-    else
-      return false;
+    return status == UNGUESSED;
   }
 
   public void markHit() {
@@ -56,8 +47,12 @@ public class Location {
     this.hasShip = bool;
   }
 
-  public void setStatus(int status) {
-    this.status = status;
+  public void setStatus(int status)
+  {
+    if(status == HIT || status == MISSED)
+      this.status = status;
+    else
+      this.status = UNGUESSED;
   }
 
   public int getStatus() {

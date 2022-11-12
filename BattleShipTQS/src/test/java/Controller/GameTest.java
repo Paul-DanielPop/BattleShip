@@ -49,7 +49,7 @@ class GameTest {
         Game game = new Game();
 
 
-        assertTrue(p.boats.get(0).getLength()==3);
+        assertTrue(p.getBoats().get(0).getLength()==3);
         assertTrue(game.hasErrors(0,8,0,p,b0));
         assertTrue(game.hasErrors(8,0,1,p,b0));
         assertFalse(game.hasErrors(7,0,1,p,b0));
