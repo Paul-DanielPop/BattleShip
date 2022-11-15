@@ -75,6 +75,7 @@ class BoardTest {
     boat.setDirection(Boat.VERTICAL);
     boat.setLocation(0,0);
 
+    //haciendo un dibujo es más entendible
     assertFalse(b.hasShip(0,0));
     assertFalse(b.hasShip(1,0));
     assertFalse(b.hasShip(2,0));
