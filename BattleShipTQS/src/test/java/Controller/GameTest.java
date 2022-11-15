@@ -1,8 +1,10 @@
 package Controller;
 
 import Model.Boat;
+import Model.MockPlayer1;
 import Model.Player;
 import View.Board;
+import View.MockBoard1;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,6 +24,18 @@ class GameTest {
         assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,3));
         assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),1,0));
         assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),1,1));
+
+
+        // Mocks de Player y Board para testear Game::askForGuess() y Board::hasLost()
+        Player player = new Player("Miguel");
+        MockPlayer1 oponente = new MockPlayer1("Juan");
+        MockBoard1 mockBoard1 = new MockBoard1();
+        mockBoard1.setMockBoardPoints(17);
+        oponente.setMockPlayerBoard(mockBoard1);
+
+        assertTrue(g.askForGuess(player,oponente,0,0));
+        assertTrue(oponente.getPlayerBoard().hasLost());
+
     }
 
     @Test

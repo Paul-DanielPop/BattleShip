@@ -96,6 +96,10 @@ public class Board {
     return board[row][col].hasShip();
   }
 
+  protected void setPoints(int points){
+    this.points = points;
+  }
+
   public void printStatus() {
 
     printHeader();

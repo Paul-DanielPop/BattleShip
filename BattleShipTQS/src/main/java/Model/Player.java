@@ -40,6 +40,10 @@ public class Player {
   public Board getPlayerBoard() {return playerBoard;}
   public Board getOppBoard() {return oppBoard;}
 
+  protected void setPlayerBoard(Board b){
+    playerBoard = b;
+  }
+
   public int numBoatsLeftToSet(){
     int counter = NUM_BOATS;
 
