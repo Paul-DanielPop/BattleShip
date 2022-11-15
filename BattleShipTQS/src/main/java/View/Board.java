@@ -6,7 +6,7 @@ import Model.Boat;
 public class Board {
 
   private Location[][] board;
-  private int points;
+  private int points; //points=numero de casillas impactadas (el que tenga todas impactadas en su board pierde)
 
   // Constants for number of rows and columns.
   private static final int NUM_ROWS = 10;
@@ -51,7 +51,7 @@ public class Board {
   }
 
   public boolean hasLost(){
-    if(points==18)
+    if(points==18)  //la suma de longitudes de los 4 barcos
       return true;
     return false;
   }
@@ -62,7 +62,7 @@ public class Board {
     int length = b.getLength();
     int dir = b.getDirection();
 
-    if(dir == 0){
+    if(dir == 0){   //horizontal
       for(int i=col; i<col+length;i++){
         if (i <= NUM_COLS){
           setShip(row, i, true);
@@ -71,7 +71,7 @@ public class Board {
         }
       }
     }
-    if(dir==1)
+    if(dir==1)  //vertical
     {
       for(int i=row; i<row+length;i++)
       {
