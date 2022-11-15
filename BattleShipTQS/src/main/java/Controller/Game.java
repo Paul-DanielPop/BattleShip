@@ -18,6 +18,9 @@ public class Game {
     p2=new Player("player2");
   }
 
+  // En el main se simula la partida entre Player 1 y Player 2
+  // Se hace uso de todos los metodos de la classe para simular la partida,
+  // los parametros necesarios se piden como input en consola y se pasan a los metodos.
   public static void main(String[] args) {
     Game currentGame = new Game();
 
@@ -155,6 +158,8 @@ public class Game {
   public Player getPlayer1(){return p1;}
   public Player getPlayer2(){return p2;}
 
+  // Metodo que recoge la coordenada[row,col] donde ataca el Player p
+  // y comprueba si ha golpeado o fallado en el tablero del Player opp
   protected static boolean askForGuess(Player p, Player opp, int row, int col) {
     if(opp.getPlayerBoard().hasShip(row,col))
     {
@@ -169,6 +174,8 @@ public class Game {
     }
   }
 
+  // Comprueba que el row y col seleccionados por el jugador esten dentro del intervalo [0,9]
+  // de los ejes del tablero.
   protected static boolean validParams(int row, int col)
   {
     if(col>=0 && col<=9 && row!=-1)
@@ -177,6 +184,9 @@ public class Game {
   }
 
 
+  // Comprueba que el barco se pueda meter en el tablero.
+  // El barco introducido no puede coincidir en una coordenada donde ya haya un barco,
+  // tampoco se puede introducir fuera del tablero.
   protected static boolean hasErrors(int row, int col, int dir, Player p, Boat b){
     int length = b.getLength();
 
@@ -221,18 +231,19 @@ public class Game {
     return false;
   }
 
+  // Metodo que posiciona un barco en coordenada[row,col] con direccion dir para el Player p
   public static void setup(Player p, int row, int col, int dir, Boat b){
     p.chooseBoatPosition(b, row, col, dir);
-    //p.getPlayerBoard().printBoats();
+
     System.out.println("You have " + p.numBoatsLeftToSet() + " remaining ships to place.");
   }
 
+  // Getter para acceder al metodo convertLetterToInt(String input) para hacer testing
   public int accessConvertLetterToInt(String input){
     return convertLetterToInt(input);
   }
 
-  //public int accessConvertInputToGameIndex(int input){return convertInputToGameIndex(input);}
-
+  // Metodo usado para convertir la selección de fila de un jugador y convertirlo al indice(int) correcto
   private static int convertLetterToInt(String input) {
     int toReturn = -1;
     switch (input)
