@@ -58,9 +58,4 @@ public class Player {
       b.setDirection(direction);
       playerBoard.addBoat(b);
   }
-
-
-
-
-
 }

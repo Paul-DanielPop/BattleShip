@@ -38,10 +38,6 @@ public class Boat {
     return direction != UNSET;
   }
 
-  public boolean getHundido() {
-    return hundido;
-  }
-
   public int getLength() {
     return length;
   }
