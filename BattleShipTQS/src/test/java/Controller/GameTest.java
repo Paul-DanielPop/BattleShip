@@ -85,9 +85,9 @@ class GameTest {
 
         for (int i = 0; i < 10; i++){
             int n = game.accessConvertLetterToInt(letters[i]);
-            assertTrue(n == i);
+            assertEquals(n, i);
         }
-        assertTrue(game.accessConvertLetterToInt("M")==-1);
+        assertEquals(-1, game.accessConvertLetterToInt("M"));
     }
 
 
@@ -97,9 +97,9 @@ class GameTest {
         Board board = game.getPlayer1().getPlayerBoard();
         Boat boat = game.getPlayer1().getBoats().get(0);
 
-        assertFalse(boat.getDirection()==0); //horizontal
-        assertFalse(boat.getCoordX()==0);
-        assertFalse(boat.getCoordY()==1);
+        assertNotEquals(0, boat.getDirection()); //horizontal
+        assertNotEquals(0, boat.getCoordX());
+        assertNotEquals(1, boat.getCoordY());
         assertFalse(board.hasShip(1,0));
         assertFalse(board.hasShip(1,1));
         assertFalse(board.hasShip(1,2));
@@ -108,9 +108,9 @@ class GameTest {
 
         game.setup(game.getPlayer1(),1,0,0,boat);
 
-        assertTrue(boat.getDirection()==0); //horizontal
-        assertTrue(boat.getCoordX()==0);
-        assertTrue(boat.getCoordY()==1);
+        assertEquals(0, boat.getDirection()); //horizontal
+        assertEquals(0, boat.getCoordX());
+        assertEquals(1, boat.getCoordY());
         assertTrue(board.hasShip(1,0));
         assertTrue(board.hasShip(1,1));
         assertTrue(board.hasShip(1,2));

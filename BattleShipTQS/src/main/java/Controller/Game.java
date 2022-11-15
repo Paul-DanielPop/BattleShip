@@ -29,7 +29,7 @@ public class Game {
         int col = -1;
         int dir = -1;
         int normCounter = 0;
-        boolean continua=false;
+        boolean continua = false;
         do {
           p1.getPlayerBoard().printBoats();
           System.out.print("Type in row (A-J): ");
@@ -57,7 +57,6 @@ public class Game {
 
       }
     }
-    clrscr();
 
     while (p2.numBoatsLeftToSet() > 0){
       for (Boat boat: p2.getBoats()){
@@ -90,7 +89,6 @@ public class Game {
       }
     }
     do {
-      clrscr();
       boolean valid = false;
       int row = 0;
       int col = 0;
@@ -108,7 +106,6 @@ public class Game {
           valid = true;
       }
 
-      clrscr();
       if (askForGuess(p1, p2, row, col)) {
         System.out.print("Hit on:\t" + "row=\t" + row + "\tcol=\t" + col + "\n");
       } else {
@@ -263,21 +260,5 @@ public class Game {
 
     return toReturn;
   }
-
-  public static void clrscr() {
-    //limpiar screen
-    //Clears Screen in java
-
-    try {
-
-      if (System.getProperty("os.name").contains("Windows"))
-
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-
-      else
-
-        Runtime.getRuntime().exec("clear");
-
-    } catch (IOException | InterruptedException ex) {}
-  }
 }
+

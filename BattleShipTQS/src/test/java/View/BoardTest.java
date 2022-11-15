@@ -13,7 +13,7 @@ class BoardTest {
 
     for (int row = 0; row < board.getNumRows(); row++){
       for (int col = 0; col < board.getNumCols(); col++){
-        assertTrue(board.getStatus(row,col) == 0);
+        assertEquals(0, board.getStatus(row, col));
       }
     }
 
@@ -22,29 +22,29 @@ class BoardTest {
   @Test
   void markHit(){
     Board b = new Board();
-    assertTrue(b.getPoints()==0);
+    assertEquals(0, b.getPoints());
     Location loc = b.get(1,1);
-    assertFalse(loc.getStatus()==loc.HIT);
+    assertNotEquals(Location.HIT, loc.getStatus());
     b.markHit(1,1);
 
-    assertTrue(b.getPoints()==1);
+    assertEquals(1, b.getPoints());
     Location locHitted = b.get(1,1);
-    assertTrue(locHitted.getStatus()==locHitted.HIT);
+    assertEquals(Location.HIT, locHitted.getStatus());
     Location locNoHit = b.get(1,2);
-    assertFalse(locNoHit.getStatus()==locNoHit.HIT);
+    assertNotEquals(Location.HIT, locNoHit.getStatus());
   }
 
   @Test
   void markMiss(){
     Board b = new Board();
     Location loc = b.get(1,1);
-    assertFalse(loc.getStatus()==loc.MISSED);
+    assertNotEquals(Location.MISSED, loc.getStatus());
     b.markMiss(1,1);
 
     Location locMissed = b.get(1,1);
-    assertTrue(locMissed.getStatus()==locMissed.MISSED);
+    assertEquals(Location.MISSED, locMissed.getStatus());
     Location locNoHit = b.get(1,2);
-    assertFalse(locNoHit.getStatus()==locNoHit.MISSED);
+    assertNotEquals(Location.MISSED, locNoHit.getStatus());
   }
 
   @Test
@@ -119,10 +119,10 @@ class BoardTest {
 
     for (int i = 0; i < 10; i++){
       char c = b.switchIntToChar(i);
-      assertTrue(c == letters[i]);
+      assertEquals(c, letters[i]);
     }
     char c = b.switchIntToChar(12);
-    assertTrue(c == 'Z');
+    assertEquals('Z', c);
   }
 
 }

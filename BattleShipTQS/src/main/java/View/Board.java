@@ -69,18 +69,28 @@ public class Board {
 
     if(dir == 0){
       for(int i=col; i<col+length;i++){
-        setShip(row, i, true);
-        setLengthOfBoat(row, i, length);
-        setDirectionOfBoat(row, i, dir);
+        if (i <= NUM_COLS){
+          setShip(row, i, true);
+          setLengthOfBoat(row, i, length);
+          setDirectionOfBoat(row, i, dir);
+        }
+        else {
+          b.setDirection(-1);
+        }
       }
     }
     if(dir==1)
     {
       for(int i=row; i<row+length;i++)
       {
-        setShip(i, col, true);
-        setLengthOfBoat(i, col, length);
-        setDirectionOfBoat(i, col, dir);
+        if (i <= NUM_ROWS){
+          setShip(i, col, true);
+          setLengthOfBoat(i, col, length);
+          setDirectionOfBoat(i, col, dir);
+        }
+        else {
+          b.setDirection(-1);
+        }
       }
     }
 
