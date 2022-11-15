@@ -45,11 +45,6 @@ public class Board {
     return !board[row][col].isUnguessed();
   }
 
-  public void setStatus(int row, int col, int status)
-  {
-    board[row][col].setStatus(status);
-  }
-
   public int getStatus(int row, int col)
   {
     return board[row][col].getStatus();
