@@ -54,17 +54,11 @@ class PlayerTest{
     @Test
     void chooseBoatPosition() {
         Player carles = new Player("Carles");
-        Player joan = new Player("Joan");
         //pairwise seria de 100 combinaciones
         carles.chooseBoatPosition(carles.getBoats().get(0), 0, 0, 0);
         carles.chooseBoatPosition(carles.getBoats().get(1), 4, 0, 0);
         carles.chooseBoatPosition(carles.getBoats().get(2), 6, 0, 0);
         carles.chooseBoatPosition(carles.getBoats().get(3), 9, 0, 0);
-
-        joan.chooseBoatPosition(joan.getBoats().get(0), 0, 0, 1);
-        joan.chooseBoatPosition(joan.getBoats().get(1), 0, 4, 1);
-        joan.chooseBoatPosition(joan.getBoats().get(2), 0, 6, 1);
-        joan.chooseBoatPosition(joan.getBoats().get(3), 0, 9, 1);
 
         assertEquals(0, carles.getBoats().get(0).getDirection());
         assertEquals(0, carles.getBoats().get(0).getCoordX());

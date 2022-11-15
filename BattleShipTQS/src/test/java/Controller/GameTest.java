@@ -66,7 +66,6 @@ class GameTest {
         assertTrue(game.hasErrors(0,6,0,p,b3));
 
 
-
         Boat b = new Boat(4);
         b.setDirection(0); //horitzontal
         b.setLocation(2,2);
