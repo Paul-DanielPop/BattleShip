@@ -17,16 +17,12 @@ class GameTest {
         g.getPlayer1().getPlayerBoard().addBoat(b);
 
         assertTrue(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,0));
+        assertTrue(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,1));
         assertTrue(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,2));
-        assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),1,0));
         assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),0,3));
+        assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),1,0));
         assertFalse(g.askForGuess(g.getPlayer2(),g.getPlayer1(),1,1));
-
-
     }
-
-
-
 
     @Test
     void validParams(){
@@ -37,7 +33,6 @@ class GameTest {
         assertFalse(g.validParams(4,-2));
         assertFalse(g.validParams(5,10));
     }
-
 
     @Test
     void hasErrors(){
@@ -97,7 +92,7 @@ class GameTest {
         Board board = game.getPlayer1().getPlayerBoard();
         Boat boat = game.getPlayer1().getBoats().get(0);
 
-        assertNotEquals(0, boat.getDirection()); //horizontal
+        assertNotEquals(0, boat.getDirection());
         assertNotEquals(0, boat.getCoordX());
         assertNotEquals(1, boat.getCoordY());
         assertFalse(board.hasShip(1,0));

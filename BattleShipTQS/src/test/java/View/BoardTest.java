@@ -108,6 +108,7 @@ class BoardTest {
     assertTrue(b1.hasShip(9,8));
     assertTrue(b1.hasShip(9,9));
     assertFalse(b1.hasShip(9,5));
+
   }
 
   @Test
