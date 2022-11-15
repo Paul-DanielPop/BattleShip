@@ -74,9 +74,6 @@ public class Board {
           setLengthOfBoat(row, i, length);
           setDirectionOfBoat(row, i, dir);
         }
-        else {
-          b.setDirection(-1);
-        }
       }
     }
     if(dir==1)
@@ -87,9 +84,6 @@ public class Board {
           setShip(i, col, true);
           setLengthOfBoat(i, col, length);
           setDirectionOfBoat(i, col, dir);
-        }
-        else {
-          b.setDirection(-1);
         }
       }
     }
