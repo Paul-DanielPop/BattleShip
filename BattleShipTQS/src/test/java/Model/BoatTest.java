@@ -13,6 +13,7 @@ class BoatTest {
     assertEquals(3, barco1.getLength());
     assertEquals(-1, barco1.getCoordX());
     assertEquals(-1, barco1.getCoordY());
+    assertEquals(-1, barco1.getDirection());
   }
 
   @Test
