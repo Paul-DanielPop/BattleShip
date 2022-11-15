@@ -48,6 +48,8 @@ class PlayerTest{
         player.chooseBoatPosition(player.getBoats().get(3), 3, 0, 0);
         assertEquals(0, player.numBoatsLeftToSet());
         assertNotEquals(-1,player.numBoatsLeftToSet());
+
+
     }
     @Test
     void chooseBoatPosition() {
