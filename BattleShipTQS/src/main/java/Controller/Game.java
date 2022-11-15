@@ -21,14 +21,13 @@ public class Game {
   public static void main(String[] args) {
     Game currentGame = new Game();
 
-    System.out.println("\nPlayer SETUP:");
+    System.out.println("\nPlayer 1 SETUP:");
 
     while (p1.numBoatsLeftToSet() > 0){
       for (Boat boat: p1.getBoats()){
         int row = -1;
         int col = -1;
         int dir = -1;
-        int normCounter = 0;
         boolean continua = false;
         do {
           p1.getPlayerBoard().printBoats();
@@ -47,16 +46,14 @@ public class Game {
           if(validParams(row,col) && !hasErrors(row,col,dir,p1,boat) && dir!=-1)
             continua=true;
 
-
-
         }while (!continua);
 
-
         setup(p1,row, col, dir, boat);
-        normCounter++;
 
       }
     }
+
+    System.out.println("\nPlayer 2 SETUP:");
 
     while (p2.numBoatsLeftToSet() > 0){
       for (Boat boat: p2.getBoats()){
@@ -88,13 +85,17 @@ public class Game {
 
       }
     }
+
+
     do {
       boolean valid = false;
       int row = 0;
       int col = 0;
       while (!valid) {
-        p1.getOppBoard().printStatus();
         System.out.println("\nPlayer 1 makes guess:");
+        System.out.println("\nOpponent board: ");
+        p1.getOppBoard().printStatus();
+
         System.out.print("Type in row (A-J): ");
         String userInputRow = reader.next();
         userInputRow = userInputRow.toUpperCase();
@@ -117,8 +118,10 @@ public class Game {
       int row2 = 0;
       int col2 = 0;
       while (!valid){
-        p2.getOppBoard().printStatus();
         System.out.println("\nPlayer 2 makes guess:");
+        System.out.println("\nOpponent board: ");
+        p2.getOppBoard().printStatus();
+
         System.out.print("Type in row (A-J): ");
         String userInputRow2 = reader.next();
         userInputRow2 = userInputRow2.toUpperCase();
@@ -220,7 +223,7 @@ public class Game {
 
   public static void setup(Player p, int row, int col, int dir, Boat b){
     p.chooseBoatPosition(b, row, col, dir);
-    p.getPlayerBoard().printBoats();
+    //p.getPlayerBoard().printBoats();
     System.out.println("You have " + p.numBoatsLeftToSet() + " remaining ships to place.");
   }
 
